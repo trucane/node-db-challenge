@@ -90,35 +90,15 @@ router.post('/:id/actions', async (req,res) =>{
             const [action_id] = await db.addAction(action, id)
 
 
-            const newEntry = await db.getAction().where({action_id})
+            const newEntry = await db.getAction(action_id)
     
-               // res.status(200).json(newEntry)
+               res.status(200).json(newEntry)
             }catch(error){
                 res.status(500).json(error)
             }
         }
     }else{
         res.status(404).json({message:"this project doesnt exist"})
-    }
-
-
-
-
-    const {name, description} = req.body;
-    if(!description || !name){
-        res.status(204).json({message:"please add a name and deacription"})
-    }else{
-        try{
-            const project = req.body;
-            //get id to return orject and not count
-            const [id] = await db.addProject(project)
-            const newEntry = await db.getProjects().where({id})
-
-            res.status(200).json(newEntry)
-
-        }catch(error){
-            res.status(500).json(error)
-        }
     }
 });
 
