@@ -13,7 +13,6 @@ exports.up = function(knex) {
       .notNullable()
 
       tbl.boolean('completed')
-      .notNullable();
   })
   .createTable('actions', tbl =>{
       tbl.increments();
